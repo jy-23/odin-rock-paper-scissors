@@ -64,15 +64,42 @@ function playRound(humanChoice, computerChoice) {
              humanChoice === "PAPER" && computerChoice === "SCISSORS" ||
              humanChoice === "SCISSORS" && computerChoice === "ROCK"
             ) {
-        return ("You lose! " + computerChoice + " beats " + humanChoice);
-        ++computerChoice;        
+        ++computerScore; 
+        return ("You lose! " + computerChoice + " beats " + humanChoice);       
     }
     else {
-        return ("You win! " + humanChoice + " beats " + computerChoice);
         ++humanScore;
+        return ("You win! " + humanChoice + " beats " + computerChoice);
     }
 }
 
-let computerSelection = getComputerChoice();
-let humanSelection = getHumanChoice();
-console.log(playRound(humanSelection, computerSelection));
+/* 
+FUNCTION playGame
+    FOR each round
+        CALL playRound
+    ENDFOR
+    If humanScore is greater than computerScore THEN
+        PRINT You Won!
+    ELSE IF humanScore is less than computerScore THEN
+        PRINT You Lost!
+    ELSE
+        PRINT It's a Tie!
+    ENDIF
+    PRINT humanScore vs computerScore
+ENDFUNCTION
+*/
+
+function playGame() {
+    for (let i = 0; i < 5; i++) {
+        let computerSelection = getComputerChoice();
+        let humanSelection = getHumanChoice();
+        console.log(playRound(humanSelection, computerSelection));
+    }
+    if (humanScore > computerScore) return "You Won!";
+    else if (humanScore < computerScore) return "You lost!";
+    else return "It's a Tie!"
+}
+
+
+console.log(playGame());
+console.log(humanScore + " to " + computerScore);
