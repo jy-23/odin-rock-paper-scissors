@@ -1,23 +1,22 @@
-/*
-INIT const variable rock as 0
-INIT const variable paper as 1
-INIT const variable scissor as 2
-
-FUNCTION getComputerChoice
-    SET computerChoice to number between 0 and 2 inclusive
-    IF computerChoice is 0 THEN
-        PRINT rock
-    ELSE IF computerChoice is 1 THEN
-        PRINT paper
-    ELSE 
-        PRINT scissor
-    ENDIF
-ENDFUNCTION
-*/
-
-
 let humanScore = 0;
 let computerScore = 0;
+
+const container = document.querySelector(".container");
+
+const rock = document.createElement("button");
+rock.textContent = "ROCK";
+rock.classList.add("rock");
+container.appendChild(rock);
+
+const paper = document.createElement("button");
+paper.textContent = "PAPER";
+paper.classList.add("paper");
+container.appendChild(paper);
+
+const scissors = document.createElement("button");
+scissors.textContent = "SCISSORS";
+scissors.classList.add("scissors");
+container.appendChild(scissors);
 
 function getComputerChoice() {
     let computerChoice = (Math.floor(Math.random() * 100) % 3);
@@ -27,35 +26,11 @@ function getComputerChoice() {
     else return "SCISSORS";
 }
 
-// console.log(getComputerChoice());
-/*
-FUNCTION getHumanChoice
-    INIT humanChoice and READ user input into humanChoice
-    RETURN humanChoice
-ENDFUNCTION
-*/
-
 function getHumanChoice() {
     let humanChoice = prompt("Enter one of the following: Rock, Paper, or Scissors");
     return humanChoice;
 }
 
-
-/*
-FUNCTION playRound(humanChoice, computerChoice)
-    SET humanChoice as all uppercased version
-    IF humanChoice is equal to computerChoice THEN
-        PRINT Tie!
-    ELSE IF humanChoice is rock and computerChoice is paper OR
-            humanChoice is paper and computerChoice is scissor OR
-            humanChoice is scissor and computerChoice is rock THEN
-        PRINT You lose! computerChoice beats humanChoice
-        INCREMENT computerScore
-    ELSE 
-        PRINT You win! humanChoice beats computerChoice
-        INCREMENT humanScore
-ENDFUNCTION
-*/
 
 function playRound(humanChoice, computerChoice) {
     humanChoice = humanChoice.toUpperCase();
@@ -73,24 +48,9 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-/* 
-FUNCTION playGame
-    FOR each round
-        CALL playRound
-    ENDFOR
-    If humanScore is greater than computerScore THEN
-        PRINT You Won!
-    ELSE IF humanScore is less than computerScore THEN
-        PRINT You Lost!
-    ELSE
-        PRINT It's a Tie!
-    ENDIF
-    PRINT humanScore vs computerScore
-ENDFUNCTION
-*/
 
 function playGame() {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 1; i++) {
         let computerSelection = getComputerChoice();
         let humanSelection = getHumanChoice();
         console.log(playRound(humanSelection, computerSelection));
@@ -100,6 +60,5 @@ function playGame() {
     else return "It's a Tie!"
 }
 
-
-console.log(playGame());
+//console.log(playGame());
 console.log(humanScore + " to " + computerScore);
