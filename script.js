@@ -3,17 +3,12 @@ let computerScore = 0;
 
 const container = document.querySelector(".container");
 
-
-
-
-
 roundResult = document.querySelector(".round-result");
 score = document.querySelector(".score");
 gameResult = document.querySelector(".game-result");
 
 function getComputerChoice() {
     let computerChoice = (Math.floor(Math.random() * 100) % 3);
-    // console.log(computerChoice);
     if (computerChoice === 0) return "ROCK";
     else if (computerChoice === 1) return "PAPER";
     else return "SCISSORS";
@@ -35,22 +30,22 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-const rock = document.createElement("button");
-rock.textContent = "ROCK";
-rock.classList.add("rock");
-rock.classList.add("choice");
-
-const paper = document.createElement("button");
-paper.textContent = "PAPER";
-paper.classList.add("paper");
-paper.classList.add("choice");
-
-const scissors = document.createElement("button");
-scissors.textContent = "SCISSORS";
-scissors.classList.add("scissors");
-scissors.classList.add("choice");
 
 function playGame() {
+    const rock = document.createElement("button");
+    rock.textContent = "ROCK";
+    rock.classList.add("rock");
+    rock.classList.add("choice");
+    
+    const paper = document.createElement("button");
+    paper.textContent = "PAPER";
+    paper.classList.add("paper");
+    paper.classList.add("choice");
+    
+    const scissors = document.createElement("button");
+    scissors.textContent = "SCISSORS";
+    scissors.classList.add("scissors");
+    scissors.classList.add("choice");
 
     container.appendChild(rock);
     container.appendChild(paper);
@@ -75,8 +70,6 @@ function playGame() {
 }
 
 
-
-
 function startGame() {
     startButton = document.createElement("button");
     startButton.textContent = "Start";
@@ -90,41 +83,10 @@ function startGame() {
 }
 
 
-quit = document.createElement("p");
-//startButton.classList.add = "replay";
-//quitButton = document.createElement("button");
-//quitButton.classList.add = "replay";
-
 function endGame() {
-/*     
-    playAgain.textContent = "Play Again?"
-    container.appendChild(playAgain);
-    startButton.textContent = "Yes";
-    container.appendChild(startButton);
-    quitButton.textContent = "No";
-    container.appendChild(quitButton);
-
-    startButton.addEventListener("click", () => {
-        computerScore = 0;
-        humanScore = 0;   
-        roundResult.textContent = "";
-        gameResult.textContent = "";
-        score.textContent = "";
-        playAgain.textContent = "";
-        container.removeChild(quitButton);
-        startGame();
-    });
-*/
+    quit = document.createElement("p");
     quit.textContent = "Bye Bye! Refresh to play again";
     container.appendChild(quit);
-/*
-    quitButton.addEventListener("click", () => {
-        playAgain.textContent = "Bye Bye! You pressed the Quit Button";
-        container.removeChild(quitButton);
-        container.removeChild(startButton);
-        return;
-    })
-*/
 }
 
 startGame();
