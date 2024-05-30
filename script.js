@@ -39,32 +39,74 @@ function playGame() {
     const rock = document.createElement("button");
     rock.textContent = "ROCK";
     rock.classList.add("rock");
+    rock.classList.add("choice");
     container.appendChild(rock);
     
     const paper = document.createElement("button");
     paper.textContent = "PAPER";
     paper.classList.add("paper");
+    paper.classList.add("choice");
     container.appendChild(paper);
     
     const scissors = document.createElement("button");
     scissors.textContent = "SCISSORS";
     scissors.classList.add("scissors");
+    scissors.classList.add("choice");
     container.appendChild(scissors);
     
-    const buttons = document.querySelectorAll("button");
+    const buttons = document.querySelectorAll(".choice");
     buttons.forEach((button) => {
         button.addEventListener("click", () => {
             humanChoice = button.textContent;
             roundResult.textContent = playRound(humanChoice, getComputerChoice());
             score.textContent = humanScore + " to " + computerScore;
             if (computerScore > 2 || humanScore > 2) {
+                container.removeChild(rock);
+                container.removeChild(paper);
+                container.removeChild(scissors);
                 if (humanScore > computerScore) gameResult.textContent = "You WON the Game!";
                 else gameResult.textContent = "You LOST the Game";
             }
         });
     });
-    
 }
 
-playGame();
+startButton = document.createElement("button");
+startButton.textContent = "Start";
+startButton.classList.add = "startBtn";
+
+function startGame() {
+    container.appendChild(startButton);
+    startButton.addEventListener("click", () => {
+        container.removeChild(startButton);
+        playGame();
+        endGame();
+    })
+}
+
+function endGame() {
+    computerScore = 0;
+    humanScore = 0;
+
+    playAgain = document.createElement("p");
+    playAgain.textContent = "Play Again?"
+    container.appendChild(playAgain);
+    startButton.textContent = "Yes";
+    container.appendChild(startButton);
+    
+
+    quitButton = document.createElement("button");
+    quitButton.textContent = "No";
+    container.appendChild(quitButton);
+
+    startButton.addEventListener("click", () => {
+        roundResult.textContent = "";
+        gameResult.textContent = "";
+        score.textContent = "";
+
+        startGame();
+    });
+}
+
+startGame();
 
