@@ -74,9 +74,11 @@ function playGame() {
     });
 }
 
-startButton = document.createElement("button");
+
+
+
 function startGame() {
-    
+    startButton = document.createElement("button");
     startButton.textContent = "Start";
     startButton.classList.add = "startBtn";
     container.appendChild(startButton);    
@@ -86,20 +88,20 @@ function startGame() {
         
     })
 }
-playAgain = document.createElement("p");
-startButton.classList.add = "replay";
-quitButton = document.createElement("button");
-quitButton.classList.add = "replay";
+
+
+quit = document.createElement("p");
+//startButton.classList.add = "replay";
+//quitButton = document.createElement("button");
+//quitButton.classList.add = "replay";
 
 function endGame() {
-     
+/*     
     playAgain.textContent = "Play Again?"
     container.appendChild(playAgain);
     startButton.textContent = "Yes";
-
     container.appendChild(startButton);
     quitButton.textContent = "No";
-    
     container.appendChild(quitButton);
 
     startButton.addEventListener("click", () => {
@@ -110,29 +112,17 @@ function endGame() {
         score.textContent = "";
         playAgain.textContent = "";
         container.removeChild(quitButton);
-        playGame();
+        startGame();
     });
-
+*/
+    quit.textContent = "Bye Bye! Refresh to play again";
+    container.appendChild(quit);
+/*
     quitButton.addEventListener("click", () => {
         playAgain.textContent = "Bye Bye! You pressed the Quit Button";
         container.removeChild(quitButton);
         container.removeChild(startButton);
         return;
-    })
-
-    /*
-    replayBtns = document.querySelectorAll(".replay");
-    replayBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            roundResult.textContent = "";
-            gameResult.textContent = "";
-            score.textContent = "";
-            playAgain.textContent = "";
-            container.remove(quitButton);
-
-            if (btn.textContent === "Yes") startGame();
-            else playAgain.textContent = "Bye Bye!"
-        })
     })
 */
 }
