@@ -3,23 +3,12 @@ let computerScore = 0;
 
 const container = document.querySelector(".container");
 
-const rock = document.createElement("button");
-rock.textContent = "ROCK";
-rock.classList.add("rock");
-container.appendChild(rock);
 
-const paper = document.createElement("button");
-paper.textContent = "PAPER";
-paper.classList.add("paper");
-container.appendChild(paper);
 
-const scissors = document.createElement("button");
-scissors.textContent = "SCISSORS";
-scissors.classList.add("scissors");
-container.appendChild(scissors);
 
-const buttons = document.querySelectorAll("button");
+
 roundResult = document.querySelector(".round-result");
+score = document.querySelector(".score");
 gameResult = document.querySelector(".game-result");
 
 function getComputerChoice() {
@@ -46,24 +35,36 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-
 function playGame() {
-    for (let i = 0; i < 1; i++) {
-        buttons.forEach((button) => {
-            button.addEventListener("click", () => {
-                humanChoice = button.className;
-
-                console.log(humanChoice);
-                roundResult.textContent = playRound(humanChoice, getComputerChoice());
-            });
+    const rock = document.createElement("button");
+    rock.textContent = "ROCK";
+    rock.classList.add("rock");
+    container.appendChild(rock);
+    
+    const paper = document.createElement("button");
+    paper.textContent = "PAPER";
+    paper.classList.add("paper");
+    container.appendChild(paper);
+    
+    const scissors = document.createElement("button");
+    scissors.textContent = "SCISSORS";
+    scissors.classList.add("scissors");
+    container.appendChild(scissors);
+    
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            humanChoice = button.textContent;
+            roundResult.textContent = playRound(humanChoice, getComputerChoice());
+            score.textContent = humanScore + " to " + computerScore;
+            if (computerScore > 2 || humanScore > 2) {
+                if (humanScore > computerScore) gameResult.textContent = "You WON the Game!";
+                else gameResult.textContent = "You LOST the Game";
+            }
         });
-        console.log(humanScore + " to " + computerScore);
-    }
-    if (humanScore > computerScore) return "You Won!";
-    else if (humanScore < computerScore) return "You lost!";
-    else return "It's a Tie!"
+    });
+    
 }
 
 playGame();
-
 
