@@ -57,7 +57,7 @@ function playGame() {
             humanChoice = button.textContent;
             roundResult.textContent = playRound(humanChoice, getComputerChoice());
             score.textContent = humanScore + " to " + computerScore;
-            if (computerScore > 2 || humanScore > 2) {
+            if (computerScore > 4 || humanScore > 4) {
                 container.removeChild(rock);
                 container.removeChild(paper);
                 container.removeChild(scissors);
