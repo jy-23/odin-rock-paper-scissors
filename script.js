@@ -35,23 +35,25 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
+const rock = document.createElement("button");
+rock.textContent = "ROCK";
+rock.classList.add("rock");
+rock.classList.add("choice");
+
+const paper = document.createElement("button");
+paper.textContent = "PAPER";
+paper.classList.add("paper");
+paper.classList.add("choice");
+
+const scissors = document.createElement("button");
+scissors.textContent = "SCISSORS";
+scissors.classList.add("scissors");
+scissors.classList.add("choice");
+
 function playGame() {
-    const rock = document.createElement("button");
-    rock.textContent = "ROCK";
-    rock.classList.add("rock");
-    rock.classList.add("choice");
+
     container.appendChild(rock);
-    
-    const paper = document.createElement("button");
-    paper.textContent = "PAPER";
-    paper.classList.add("paper");
-    paper.classList.add("choice");
     container.appendChild(paper);
-    
-    const scissors = document.createElement("button");
-    scissors.textContent = "SCISSORS";
-    scissors.classList.add("scissors");
-    scissors.classList.add("choice");
     container.appendChild(scissors);
     
     const buttons = document.querySelectorAll(".choice");
@@ -66,46 +68,73 @@ function playGame() {
                 container.removeChild(scissors);
                 if (humanScore > computerScore) gameResult.textContent = "You WON the Game!";
                 else gameResult.textContent = "You LOST the Game";
+                endGame();
             }
         });
     });
 }
 
 startButton = document.createElement("button");
-startButton.textContent = "Start";
-startButton.classList.add = "startBtn";
-
 function startGame() {
-    container.appendChild(startButton);
+    
+    startButton.textContent = "Start";
+    startButton.classList.add = "startBtn";
+    container.appendChild(startButton);    
     startButton.addEventListener("click", () => {
         container.removeChild(startButton);
         playGame();
-        endGame();
+        
     })
 }
+playAgain = document.createElement("p");
+startButton.classList.add = "replay";
+quitButton = document.createElement("button");
+quitButton.classList.add = "replay";
 
 function endGame() {
-    computerScore = 0;
-    humanScore = 0;
-
-    playAgain = document.createElement("p");
+     
     playAgain.textContent = "Play Again?"
     container.appendChild(playAgain);
     startButton.textContent = "Yes";
-    container.appendChild(startButton);
-    
 
-    quitButton = document.createElement("button");
+    container.appendChild(startButton);
     quitButton.textContent = "No";
+    
     container.appendChild(quitButton);
 
     startButton.addEventListener("click", () => {
+        computerScore = 0;
+        humanScore = 0;   
         roundResult.textContent = "";
         gameResult.textContent = "";
         score.textContent = "";
-
-        startGame();
+        playAgain.textContent = "";
+        container.removeChild(quitButton);
+        playGame();
     });
+
+    quitButton.addEventListener("click", () => {
+        playAgain.textContent = "Bye Bye! You pressed the Quit Button";
+        container.removeChild(quitButton);
+        container.removeChild(startButton);
+        return;
+    })
+
+    /*
+    replayBtns = document.querySelectorAll(".replay");
+    replayBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            roundResult.textContent = "";
+            gameResult.textContent = "";
+            score.textContent = "";
+            playAgain.textContent = "";
+            container.remove(quitButton);
+
+            if (btn.textContent === "Yes") startGame();
+            else playAgain.textContent = "Bye Bye!"
+        })
+    })
+*/
 }
 
 startGame();
