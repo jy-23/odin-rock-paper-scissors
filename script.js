@@ -4,8 +4,51 @@ let computerScore = 0;
 const container = document.querySelector(".container");
 
 roundResult = document.querySelector(".round-result");
-score = document.querySelector(".score");
+scoreContainer = document.querySelector(".score");
+humanScoreDisplay = document.querySelector(".human-score");
+computerScoreDisplay = document.querySelector(".computer-score");
 gameResult = document.querySelector(".game-result");
+
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+const gameBtns = document.querySelectorAll(".player-choice");
+
+playAgain = document.querySelector(".play-again");
+playBtn = document.querySelector("#yes");
+quitBtn = document.querySelector("#no");
+
+gameBtns.forEach((button) => {
+    button.addEventListener("click", (event) => {
+        humanChoice = event.target.id;
+        roundResult.textContent = playRound(humanChoice, getComputerChoice());
+        humanScoreDisplay.textContent = humanScore;
+        computerScoreDisplay.textContent = computerScore;
+        if (computerScore > 4 || humanScore > 4) {
+            disableButtons();
+            if (humanScore > computerScore) gameResult.textContent = "You WON the Game!";
+            else gameResult.textContent = "You LOST the Game";
+            playAgain.style.display = "block";
+            playBtn.style.display = "inline";
+            quitBtn.style.display = "inline";
+        }
+    });
+});
+
+playBtn.addEventListener("click", playGame);
+quitBtn.addEventListener("click", endGame);
+
+function disableButtons() {
+    gameBtns.forEach((button) => {
+        button.disabled = true; 
+    })
+}
+
+function enableButtons() {
+    gameBtns.forEach((button) => {
+        button.disabled = false;
+    })
+}
 
 function getComputerChoice() {
     let computerChoice = (Math.floor(Math.random() * 100) % 3);
@@ -14,80 +57,47 @@ function getComputerChoice() {
     else return "SCISSORS";
 }
 
+
 function playRound(humanChoice, computerChoice) {
     humanChoice = humanChoice.toUpperCase();
-    if (humanChoice === computerChoice) return ("Tie! Both returned " + humanChoice);
+    if (humanChoice === computerChoice) return `Tie! Both returned ${humanChoice}`;
     else if (humanChoice === "ROCK" && computerChoice === "PAPER" ||
              humanChoice === "PAPER" && computerChoice === "SCISSORS" ||
              humanChoice === "SCISSORS" && computerChoice === "ROCK"
             ) {
         ++computerScore; 
-        return ("You lose! " + computerChoice + " beats " + humanChoice);       
+        return `You lose! ${computerChoice} beats ${humanChoice}`;       
     }
     else {
         ++humanScore;
-        return ("You win! " + humanChoice + " beats " + computerChoice);
+        return `You win! ${humanChoice} beats ${computerChoice}`;
     }
 }
 
-
-function playGame() {
-    const rock = document.createElement("button");
-    rock.textContent = "ROCK";
-    rock.classList.add("rock");
-    rock.classList.add("choice");
-    
-    const paper = document.createElement("button");
-    paper.textContent = "PAPER";
-    paper.classList.add("paper");
-    paper.classList.add("choice");
-    
-    const scissors = document.createElement("button");
-    scissors.textContent = "SCISSORS";
-    scissors.classList.add("scissors");
-    scissors.classList.add("choice");
-
-    container.appendChild(rock);
-    container.appendChild(paper);
-    container.appendChild(scissors);
-    
-    const buttons = document.querySelectorAll(".choice");
-    buttons.forEach((button) => {
-        button.addEventListener("click", () => {
-            humanChoice = button.textContent;
-            roundResult.textContent = playRound(humanChoice, getComputerChoice());
-            score.textContent = humanScore + " to " + computerScore;
-            if (computerScore > 4 || humanScore > 4) {
-                container.removeChild(rock);
-                container.removeChild(paper);
-                container.removeChild(scissors);
-                if (humanScore > computerScore) gameResult.textContent = "You WON the Game!";
-                else gameResult.textContent = "You LOST the Game";
-                endGame();
-            }
-        });
-    });
+function removePlayAgain() {
+    playAgain.style.display = "none";
+    playBtn.style.display = "none";
+    quitBtn.style.display = "none";
 }
 
-
-function startGame() {
-    startButton = document.createElement("button");
-    startButton.textContent = "Start";
-    startButton.classList.add = "startBtn";
-    container.appendChild(startButton);    
-    startButton.addEventListener("click", () => {
-        container.removeChild(startButton);
-        playGame();
-        
-    })
+function playGame() {
+    humanScore = 0;
+    computerScore = 0;
+    humanScoreDisplay.textContent = humanScore;
+    computerScoreDisplay.textContent = computerScore;
+    roundResult.textContent = "";
+    gameResult.textContent = "";
+    removePlayAgain();
+    enableButtons();
 }
 
 
 function endGame() {
+    removePlayAgain();
+    roundResult.textContent = "";;
     quit = document.createElement("p");
-    quit.textContent = "Bye Bye! Refresh to play again";
+    quit.textContent = "Bye Bye! You pressed the quit button";
     container.appendChild(quit);
 }
 
-startGame();
-
+playGame();
